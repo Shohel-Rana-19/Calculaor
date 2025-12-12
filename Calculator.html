@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Calculator</title>
+ <style>
+ body {
+ background: linear-gradient(135deg, #2e9c9e, #9333ea);
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-family: 'Segoe UI', sans-serif;
+ }
+ .calculator {
+ background: #fff;
+ border-radius: 15px;
+ box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+ padding: 20px;
+ width: 300px;
+ }
+ .display {
+ background: #f3f4f6;
+ border: none;
+ border-radius: 10px;
+ width: 100%;
+ height: 60px;
+ text-align: right;
+ font-size: 2em;
+ padding: 10px;
+ margin-bottom: 15px;
+ color: #111827;
+ }
+ .buttons {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 10px;
+ }
+ button {
+ padding: 15px;
+ font-size: 1.5em;
+ border: none;
+ border-radius: 10px;
+ cursor: pointer;
+ background: #788cb5;
+ transition: all 0.1s ease;
+ }
+ button:hover {
+ background: #d1d5db;
+ }
+ .operator {
+ background: #2d9479;
+ color: white;
+ }
+ .operator:hover {
+ background: #ae1ccb;
+ }
+ .equal {
+ background: #04df96;
+ color: white;
+ grid-column: span 2;
+ }
+ .equal:hover {
+ background: #e9121d;
+ }
+ .clear {
+ background: #d10606;
+ color: white;
+ }
+ .clear:hover {
+ background: #0faa2b;
+ }
+ </style>
+</head>
+<body>
+ <div class="calculator">
+ <input type="text" class="display" id="display" readonly />
+ <div class="buttons">
+ <button class="clear" onclick="clearDisplay()">C</button>
+ <button onclick="deleteLast()">DEL</button>
+ <button class="operator" onclick="appendToDisplay('/')">÷</button>
+ <button class="operator" onclick="appendToDisplay('*')">×</button>
+ <button onclick="appendToDisplay('7')">7</button>
+ <button onclick="appendToDisplay('8')">8</button>
+ <button onclick="appendToDisplay('9')">9</button>
+ <button class="operator" onclick="appendToDisplay('-')">−</button>
+ <button onclick="appendToDisplay('4')">4</button>
+ <button onclick="appendToDisplay('5')">5</button>
+ <button onclick="appendToDisplay('6')">6</button>
+ <button class="operator" onclick="appendToDisplay('+')">+</button>
+ <button onclick="appendToDisplay('1')">1</button>
+ <button onclick="appendToDisplay('2')">2</button>
+ <button onclick="appendToDisplay('3')">3</button>
+ <button class="operator" onclick="appendToDisplay('%')">%</button>
+ <button onclick="appendToDisplay('0')">0</button>
+ <button onclick="appendToDisplay('.')">.</button>
+ <button class="equal" onclick="calculateResult()">=</button>
+ </div>
+ </div>
+ <script>
+ const display = document.getElementById('display');
+ function appendToDisplay(value) {
+ display.value += value;
+ }
+ function clearDisplay() {
+ display.value = '';
+ }
+ function deleteLast() {
+ display.value = display.value.slice(0, -1);
+ }
+ function calculateResult() {
+ try {
+ display.value = eval(display.value.replace('×', '*').replace('÷', '/'));
+ } catch (error) {
+ display.value = 'Error';
+ }
+ }
+ </script>
+</body>
+</html>
